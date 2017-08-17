@@ -6,6 +6,34 @@
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
 		</encoder>
 	</appender>
+	
+	<!-- 每天生成一个文件，保存30天的日志 -->
+	<appender name="DAYFILE" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+　　	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
+　　　　	<fileNamePattern>E:/logback/logFile.%d{yyyy-MM-dd}.log</fileNamePattern> 
+　　　　	<maxHistory>30</maxHistory> 
+　　　　</rollingPolicy> 
+	　　　　<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+				<!-- 格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+	　　　　	<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern> 
+	　　　　</encoder> 
+　　</appender>
+
+	<!-- 当日志大小超过10M时，将生成新的日志，日志的最大文件数超过3时将覆盖最早的日志文件 -->
+	<!-- <appender name="SIZEFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+　　	<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy"> 
+	　　	<fileNamePattern>E:/logback/tests.%i.log.zip</fileNamePattern> 
+	　　	<minIndex>1</minIndex> 
+	　　	<maxIndex>3</maxIndex> 
+　　	</rollingPolicy> 
+	　　<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy"> 
+	　　	<maxFileSize>10MB</maxFileSize> 
+	　　</triggeringPolicy> 
+	　　<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 
+	　　	<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern> 
+	　　</encoder> 
+　　</appender> -->
 
 	<root level="debug">
 		<appender-ref ref="STDOUT" />
